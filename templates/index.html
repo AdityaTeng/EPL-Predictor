@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-info border-bottom shadow-sm text-white">
+  <h4 class="my-0 mr-md-auto font-weight-normal">EPL Match Predictor</h4>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-white" href="#">About Us</a>
+    <a class="p-2 text-white" href="#">Project Details</a>
+  </nav>
+</div>
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4 text-white"><strong>Predict Scores </strong>for EPL Match</h1>
+  <p class="lead text-white">Lets Predict top 3 scores for EPL Match in next Game Week </p>
+</div>
+
+<form action='/submit' method="post">
+<div class='container'>
+	<div class="row">
+		<div class="col-sm-4 text-right">
+			<select name="home" class="selectpicker" data-live-search="true" data-style="btn-success">
+			  <option data-tokens="home">Home Team</option>
+			  <option data-tokens="Arsenal">Arsenal</option>
+			  <option data-tokens="Man City">Man City</option>
+			  <option data-tokens="Man United">Man United</option>
+			</select>			
+		</div>
+	  	<div class="col-sm-4 text-center"> 
+	  		<h5>vs</h5>
+        <br><br>
+	  		<button type="submit" class="btn btn-lg btn-warning">Predict</button>
+	  	</div>
+	  	<div class="col-sm-4 text-left">
+			<select name="away" class="selectpicker" data-live-search="true" data-style="btn-success">
+			  <option data-tokens="home">Away Team</option>
+        <option data-tokens="Arsenal">Arsenal</option>
+        <option data-tokens="Man City">Man City</option>
+        <option data-tokens="Man United">Man United</option>
+			</select>
+	  	</div>
+	</div>	
+</div>
+</form>
+<br>
+<br>
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h4 class="my-0 font-weight-normal">{{ home }} Win</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title"> {{ prediction['Home Team Winning Probability']}}% </h1>
+        <h3>Betting Odds</h3>
+        <h4>{{ prediction['Home Team Betting Odds'] }}</h4>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h4 class="my-0 font-weight-normal">Draw</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title"> {{ prediction['Draw Probability']}}% </h1>
+        <h3>Betting Odds</h3>
+        <h4>{{ prediction['Draw Betting Odds'] }}</h4>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h4 class="my-0 font-weight-normal">{{ away }} Win</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title"> {{ prediction['Away Team Winning Probability']}}% </h1>
+        <h3>Betting Odds</h3>
+        <h4>{{ prediction['Away Team Betting Odds'] }}</h4>
+      </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h4 class="my-0 font-weight-normal">Most Likely Score</h4>
+      </div>
+      <div class="card-body">
+         <h1 class="card-title pricing-card-title"> {{ prediction['Predicted Score 1'][0] }} - {{ prediction['Predicted Score 1'][1] }} </h1>
+         <h3>{{ prediction['Predicted Score 1'][2] }}</h3>        
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h4 class="my-0 font-weight-normal">Second Most Likely Score</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title"> {{ prediction['Predicted Score 2'][0] }} - {{ prediction['Predicted Score 2'][1] }} </h1>
+        <h3>{{ prediction['Predicted Score 2'][2] }}</h3>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h4 class="my-0 font-weight-normal">Third Most Likely Score</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title"> {{ prediction['Predicted Score 3'][0] }} - {{ prediction['Predicted Score 3'][1] }} </h1>
+         <h3>{{ prediction['Predicted Score 3'][2] }}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+      <div class="col-md">
+        <img class="mb-2" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+        <small class="d-block mb-3 text-muted">&copy; 2017-2019 Aditya</small>
+      </div>
+  </footer>
+</div>
+{% endblock %}
